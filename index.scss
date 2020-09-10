@@ -1,0 +1,339 @@
+//
+// Read the blog post here:
+// http://una.im/sass-pixel-art
+//
+
+// Setting the colors we're syncing up with
+$pixel-color-map: (
+  'r' : #f00,
+  'w': #fff,
+  'k': #000,
+  'o': transparent,
+  't': #83401f,
+  'p': #ffbc77,
+  'b': #06f,
+  'y': #ff0,
+  'n': #ff8000,
+  'g': #5ac528
+);
+
+// Size of the pixels
+$pixel-size: 10px !default;
+
+// Mario pixel art matrices!
+$pixel-art:(
+  mushroom: (
+    (o o o o o k k k k k k o o o o o)
+    (o o o k k r r r r w w k k o o o)
+    (o o k w w r r r r w w w w k o o)
+    (o k w w r r r r r r w w w w k o)
+    (o k w r r w w w w r r w w w k o)
+    (k r r r w w w w w w r r r r r k)
+    (k r r r w w w w w w r r w w r k)
+    (k w r r w w w w w w r w w w w k)
+    (k w w r r w w w w r r w w w w k)
+    (k w w r r r r r r r r r w w r k)
+    (k w r r k k k k k k k k r r r k)
+    (o k k k w w k w w k w w k k k o)
+    (o o k w w w k w w k w w w k o o)
+    (o o k w w w w w w w w w w k o o)
+    (o o o k w w w w w w w w k o o o)
+    (o o o o k k k k k k k k o o o o)
+  ),
+
+  mario: (
+    (o o o r r r r r r o o o o)
+    (o o r r r r r r r r r r o)
+    (o o t t t p p p k p o o o)
+    (o t p t p p p p k p p p o)
+    (o t p t t p p p p k p p p)
+    (o t t p p p p p k k k k o)
+    (o o o p p p p p p p p o o)
+    (o o r r b r r r r o o o o)
+    (o r r r b r r b r r r r o)
+    (r r r r b b b b r r r r o)
+    (p p r b y b b y b r p p o)
+    (p p p b b b b b b p p p o)
+    (p p b b b b b b b b p p o)
+    (o o b b b o o b b b o o o)
+    (o t t t o o o o t t t o o)
+    (t t t t o o o o t t t t o)
+  ),
+  star: (
+    (o o o o o o o k k o o o o o o o)
+    (o o o o o o k y y k o o o o o o)
+    (o o o o o o k y y k o o o o o o)
+    (o o o o o k y y y y k o o o o o)
+    (k k k k k k y y y y k k k k k k)
+    (k y y y y y y y y y y y y y y k)
+    (o k y y y y k y y k y y y y k o)
+    (o o k y y y k y y k y y y k o o)
+    (o o o k y y k y y k y y k o o o)
+    (o o o k y y y y y y y y k o o o)
+    (o o k y y y y y y y y y y k o o)
+    (o o k y y y y y y y y y y k o o)
+    (o k y y y y y k k y y y y y k o)
+    (o k y y y k k o o k k y y y k o)
+    (k y y k k o o o o o o k k y y k)
+    (k k k o o o o o o o o o o k k k)
+  ),
+  flower: (
+    (o o o k k k k k k k k k k o o o)
+    (o k k k n n n n n n n n k k k o)
+    (k k n n n y y y y y y n n n k k)
+    (k n n y y y k w w k y y y n n k)
+    (k n n y y y k y y k y y y n n k)
+    (k n n n n y y y y y y n n n n k)
+    (k k n n n n n n n n n n n n k k)
+    (o k k k n n n n n n n n k k k o)
+    (o o o k k k k k k k k k k o o o)
+    (o k k o o o k g g k o o o k k o)
+    (k g g k k o k g g k o k k g g k)
+    (k g g g g k k g g k k g g g g k)
+    (k g g g g g k g g k g g g g g k)
+    (o k g g g g k g g k g g g g k o)
+    (o o k k g g g g g g g g k k o o)
+    (o o o o k k k k k k k k o o o o)
+  ),
+  chance: (
+    (o t t t t t t t t t t t t t t o)
+    (t p p p p p p p p p p p p p p k)
+    (t p k p p p p p p p p p p k p k)
+    (t p p p p t t t t t p p p p p k)
+    (t p p p t t k k k t t p p p p k)
+    (t p p p t t k p p t t k p p p k)
+    (t p p p t t k p p t t k p p p k)
+    (t p p p p k k p t t t k p p p k)
+    (t p p p p p p t t k k k p p p k)
+    (t p p p p p p t t k p p p p p k)
+    (t p p p p p p p k k p p p p p k)
+    (t p p p p p p t t p p p p p p k)
+    (t p p p p p p t t k p p p p p k)
+    (t p k p p p p p k k p p p k p k)
+    (t p p p p p p p p p p p p p p k)
+    (k k k k k k k k k k k k k k k k)
+  ),
+  boo: (
+    (o o o o o k k k k k o o o o o o)
+    (o o o k k w w w w w k k o o o o)
+    (o o k w w w w w w w w w k o o o)
+    (o k w w w w w w w w w w w k o o)
+    (o k w k w k w w w w w w w w k o)
+    (k w w k w k w w w w k k k w w k)
+    (k w w k w k w w w k w w k w w k)
+    (k w w w w w w w w w w w k w k o)
+    (k w r w r w r w w w w k w w w k)
+    (k w r r r r r w w w w w w w w k)
+    (k w r r r r r w w w w w w w w k)
+    (o k w r r r r r w w w w w w w k)
+    (o k w r w r w r w w w w w w k o)
+    (o o k w w w w w w w w w w k o o)
+    (o o o k k w w w w w w k k o o o)
+    (o o o o o k k k k k k o o o o o)
+  ),
+);
+
+// Function to read the matrix and pixelize it!
+@function pixelize($matrix, $size){
+    $l: length($matrix); // length of the entire
+    $sh: ''; // shadows list
+    $i: $l; // length of the line
+
+    // read through the length of the matrix and decide on the box shadow color and position
+    @for $i from 1 through $l{
+      $row: nth($matrix,$i); //
+
+      @for $j from 1 through length($row){
+          $item: nth($row,$j);
+
+          @if map-has-key($pixel-color-map, $item) {
+            $sh:  $sh + ($j*$size) + ' ' + ($i*$size) + ' ' + map-get($pixel-color-map, $item);
+          } @else {
+            @warn 'there is no color specified in "$pixel-color-map" for: "#{$item}"';
+          }
+
+        @if not ($j == length($row) and $i == $l) {
+          $sh: $sh + ',';
+        }
+      }
+    }
+
+    @return unquote($sh);
+}
+
+// Mixin to style each item
+@mixin style-item($matrix, $size){
+  position: relative; // pixels stack next to each other
+
+  // set width & height of icon based on size of pixels
+  width:($size * length(nth($matrix,1)));
+  height:($size * length($matrix));
+
+  &:after{
+    content: '';
+
+    // position everything from the top left corner
+    position: absolute;
+    top: (-$size);
+    left: (-$size);
+    width: $size;
+    height: $size;
+
+    // this is where we make the stitch
+    box-shadow: pixelize($matrix,$size);
+  }
+}
+
+// Page styling
+body {
+  background: #97f0fa;
+}
+
+.mario-art{
+  list-style: none;
+  margin: 3em auto;
+  max-width: 800px;
+  padding: 0;
+  text-align: center;
+  width: 100%;
+
+  li {
+    display: inline-block;
+    margin: 2em;
+  }
+
+   @each $key, $value in $pixel-art{
+    &--#{$key}{
+      @include style-item($value, $pixel-size);
+    }
+  }
+}
+
+// just styling the link to the post :)
+
+a {
+  text-align: center;
+  display: block;
+  width: 100%;
+  color: #000;
+  font-family: 'Open Sans', sans-serif;
+}
+
+@import "compass/css3";
+
+*,
+*:after,
+*:before
+{
+    -moz-box-sizing: border-box; 
+    -webkit-box-sizing: border-box; 
+    box-sizing: border-box;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+$cell-size:20px;
+$grid-width:($cell-size * 10) + 2px;
+$grid-height:($cell-size * 20) + 2px;
+$preview-size:($cell-size * 5) + 2px;
+
+/* needs to correspond to piece.js */
+$colours:
+    ('white',#f0f0f0),
+    ('blue',#3498db),
+    ('yellow',#f1c40f),
+    ('green',#2ecc71),
+    ('red',#e74c3c),
+    ('grey',#95a5a6),
+    ('black',#34495e),
+    ('purple',#9b59b6),
+    ('white',#ecf0f1),
+    ('orange',#e67e22),
+    ('turquoise',#1abc9c);
+
+@each $colour, $hex in $colours
+{
+    .#{$colour}
+    {
+        background-color:$hex; 
+        border:1px solid darken($hex,20);
+        box-shadow:inset 0 0 1px 1px lighten($hex,20);
+    }
+}
+
+body { background-color:#222; }
+
+.event-counter
+{
+    width:$grid-width;
+    height:20px;
+    margin:20px auto;
+    font-size:10px;
+    text-align:center;
+    color:#f0f0f0;
+    opacity:0;
+}
+
+.score,
+.level
+{
+    position:fixed;
+    left:463px;
+    z-index:1;
+    width:$grid-width;
+    height:40px;
+    margin:10px auto;
+    font-size:20px;
+    text-align:center;
+    font-family: Consolas, monaco, monospace;
+    color:#f0f0f0;
+}
+
+.score
+{
+    top:150px;
+    font-weight:bold;
+    &:before
+    {
+        content:'score: ';
+    }
+}
+
+.level
+{
+    top:175px;
+    &:before
+    {
+        content:'level: ';
+    }
+}
+
+.grid
+{
+    width:$grid-width;
+    height:$grid-height;
+    position:fixed;
+    top:50px;
+    left:300px;
+    border:1px solid darken(#f0f0f0,20);
+    box-shadow:0 0 200px 0 #000;
+}
+
+
+.preview-cells
+{
+    width:$preview-size;
+    height:$preview-size;
+    position:fixed;
+    top:50px;
+    left:520px;
+    border:1px solid darken(#f0f0f0,20);
+}
+
+.cell
+{
+    width:$cell-size;
+    height:$cell-size;
+    display:inline-block;
+    float: left;
+}
